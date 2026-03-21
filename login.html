@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stackly</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="login-page">
+    <div class="login-container">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-5 col-md-7">
+                    <div class="login-box animate__animated animate__fadeInDown">
+                        <div class="text-center mb-4">
+                            <a href="index.html" class="brand-logo">
+                                <img src="images/logoimg.webp" alt="Stackly Logo" class="mb-2" width="80">
+                                <h2>STACKLY</h2>
+                            </a>
+                            <p class="text-muted">Secure Login Portal</p>
+                        </div>
+
+                        <ul class="nav nav-pills nav-justified mb-4" id="loginTabs" role="tablist">
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link " id="client-tab" data-bs-toggle="pill" data-bs-target="#client-login" type="button" role="tab">
+                                    <i class="fas fa-user"></i> Client Login
+                                </button>
+                            </li>
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link active" id="admin-tab" data-bs-toggle="pill" data-bs-target="#admin-login" type="button" role="tab">
+                                    <i class="fas fa-user-shield"></i> Admin Login
+                                </button>
+                            </li>
+                        </ul>
+
+                        <div class="tab-content" id="loginTabContent">
+                            <!-- Client Login -->
+                            <div class="tab-pane fade" id="client-login" role="tabpanel">
+                                <form id="clientLoginForm">
+                                    <div class="mb-3">
+                                        <label for="clientEmail" class="form-label">
+                                            <i class="fas fa-envelope"></i> Email Address
+                                        </label>
+                                        <input type="email" class="form-control" id="clientEmail" placeholder="Enter your email" required>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="clientPassword" class="form-label">
+                                            <i class="fas fa-lock"></i> Password
+                                        </label>
+                                        <div class="input-group">
+                                            <input type="password" class="form-control" id="clientPassword" placeholder="Enter your password" required>
+                                            <button class="btn btn-outline-secondary" type="button" onclick="togglePassword('clientPassword')">
+                                                <i class="fas fa-eye"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <div class="mb-3 form-check">
+                                        <input type="checkbox" class="form-check-input" id="clientRemember">
+                                        <label class="form-check-label" for="clientRemember">Remember me</label>
+                                    </div>
+                                    <button type="submit" class="btn btn-primary w-100 mb-3">
+                                        <i class="fas fa-sign-in-alt"></i> Login to Client Dashboard
+                                    </button>
+                                    <div class="text-center">
+                                        <a href="404.html" class="text-muted small">Forgot Password?</a>
+                                    </div>
+                                    <hr class="my-4">
+                                    <div class="text-center">
+                                        <p class="text-muted small">Don't have an account?</p>
+                                        <a href="signup.html" class="btn btn-outline-primary">
+                                            <i class="fas fa-user-plus"></i> Create Account
+                                        </a>
+                                    </div>
+                                </form>
+                            </div>
+
+                            <!-- Admin Login -->
+                            <div class="tab-pane fade show active" id="admin-login" role="tabpanel">
+                                <form id="adminLoginForm">
+                                    <div class="mb-3">
+                                        <label for="adminEmail" class="form-label">
+                                            <i class="fas fa-envelope"></i> Admin Email
+                                        </label>
+                                        <input type="email" class="form-control" id="adminEmail" placeholder="Enter admin email" required>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="adminPassword" class="form-label">
+                                            <i class="fas fa-lock"></i> Password
+                                        </label>
+                                        <div class="input-group">
+                                            <input type="password" class="form-control" id="adminPassword" placeholder="Enter admin password" required>
+                                            <button class="btn btn-outline-secondary" type="button" onclick="togglePassword('adminPassword')">
+                                                <i class="fas fa-eye"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="adminCode" class="form-label">
+                                            <i class="fas fa-key"></i> Security Code
+                                        </label>
+                                        <input type="text" class="form-control" id="adminCode" placeholder="Enter 2FA code" required>
+                                    </div>
+                                    <div class="mb-3 form-check">
+                                        <input type="checkbox" class="form-check-input" id="adminRemember">
+                                        <label class="form-check-label" for="adminRemember">Remember this device</label>
+                                    </div>
+                                    <button type="submit" class="btn btn-danger w-100 mb-3">
+                                        <i class="fas fa-shield-alt"></i> Login to Admin Dashboard
+                                    </button>
+                                    <div class="text-center">
+                                        <a href="404.html" class="text-muted small">Forgot Password?</a>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+
+                        <div class="mt-4 text-center">
+                            <a href="index.html" class="text-muted">
+                                <i class="fas fa-arrow-left"></i> Back to Home
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="text-center mt-4">
+                        <p class="text-muted small">
+                            Protected by Stackly Security &copy; 2024
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.5/jquery.validate.min.js"></script>
+    <script>
+        function togglePassword(fieldId) {
+            const field = document.getElementById(fieldId);
+            const icon = event.currentTarget.querySelector('i');
+            if (field.type === 'password') {
+                field.type = 'text';
+                icon.classList.remove('fa-eye');
+                icon.classList.add('fa-eye-slash');
+            } else {
+                field.type = 'password';
+                icon.classList.remove('fa-eye-slash');
+                icon.classList.add('fa-eye');
+            }
+        }
+
+        // Client Login Form Validation
+        $('#clientLoginForm').validate({
+            submitHandler: function(form) {
+                // Redirect to client dashboard
+                window.location.href = 'dashboard/client-dashboard.html';
+                return false;
+            }
+        });
+
+        // Admin Login Form Validation
+        $('#adminLoginForm').validate({
+            submitHandler: function(form) {
+                // Redirect to admin dashboard
+                window.location.href = 'dashboard/admin-dashboard.html';
+                return false;
+            }
+        });
+    </script>
+</body>
+</html>

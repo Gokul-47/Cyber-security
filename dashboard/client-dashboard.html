@@ -1,0 +1,1604 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stackly</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../css/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body class="dashboard-page">
+    <!-- Top Navigation -->
+    <nav class="navbar navbar-dark dashboard-navbar fixed-top">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="../index.html">
+                <img src="../images/logoimg.webp" alt="Stackly Logo"> STACKLY
+            </a>
+            <button class="navbar-toggler d-lg-none" type="button" id="sidebarToggle">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+           
+        </div>
+    </nav>
+
+    <div class="dashboard-wrapper">
+        <!-- Sidebar -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <h4><i class="fas fa-user"></i> Client Portal</h4>
+            </div>
+            <ul class="sidebar-menu">
+                <li class="active">
+                    <a href="#" data-section="dashboard">
+                        <i class="fas fa-home"></i> Dashboard
+                    </a>
+                </li>
+                <li>
+                    <a href="#" data-section="security-status">
+                        <i class="fas fa-shield-alt"></i> Security Status
+                    </a>
+                </li>
+                <li>
+                    <a href="#" data-section="reports">
+                        <i class="fas fa-chart-bar"></i> Reports
+                    </a>
+                </li>
+                <li>
+                    <a href="#" data-section="alerts">
+                        <i class="fas fa-exclamation-triangle"></i> Alerts
+                    </a>
+                </li>
+                <li>
+                    <a href="#" data-section="invoices">
+                        <i class="fas fa-file-invoice"></i> Invoices
+                    </a>
+                </li>
+                <li>
+                    <a href="#" data-section="support-tickets">
+                        <i class="fas fa-ticket-alt"></i> Support Tickets
+                    </a>
+                </li>
+                <li>
+                    <a href="#" data-section="downloads">
+                        <i class="fas fa-download"></i> Downloads
+                    </a>
+                </li>
+                <li>
+                    <a href="#" data-section="documentation">
+                        <i class="fas fa-book"></i> Documentation
+                    </a>
+                </li>
+                <li>
+                    <a href="#" data-section="settings">
+                        <i class="fas fa-cog"></i> Settings
+                    </a>
+                </li>
+            </ul>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="dashboard-content">
+            <div class="container-fluid">
+                <!-- Dashboard Section -->
+                <div id="dashboard-section" class="dashboard-section active">
+                    <div class="page-header-dashboard mb-4">
+                        <h1>Welcome Back, Client!</h1>
+                        <p class="text-muted">Here's your security overview</p>
+                    </div>
+
+                <!-- Stats Cards -->
+                <div class="row mb-4">
+                    <div class="col-xl-3 col-md-6 mb-4">
+                        <div class="stat-card-dashboard green">
+                            <div class="stat-icon"><i class="fas fa-shield-alt"></i></div>
+                            <div class="stat-info">
+                                <h3>Protected</h3>
+                                <p class="stat-number">100%</p>
+                                <small>Security Status</small>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-3 col-md-6 mb-4">
+                        <div class="stat-card-dashboard blue">
+                            <div class="stat-icon"><i class="fas fa-bug"></i></div>
+                            <div class="stat-info">
+                                <h3>Threats Blocked</h3>
+                                <p class="stat-number">1,234</p>
+                                <small>This Month</small>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-3 col-md-6 mb-4">
+                        <div class="stat-card-dashboard orange">
+                            <div class="stat-icon"><i class="fas fa-exclamation-circle"></i></div>
+                            <div class="stat-info">
+                                <h3>Alerts</h3>
+                                <p class="stat-number">5</p>
+                                <small>Pending Review</small>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-3 col-md-6 mb-4">
+                        <div class="stat-card-dashboard purple">
+                            <div class="stat-icon"><i class="fas fa-clock"></i></div>
+                            <div class="stat-info">
+                                <h3>Uptime</h3>
+                                <p class="stat-number">99.9%</p>
+                                <small>Last 30 Days</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Charts and Activity -->
+                <div class="row">
+                    <div class="col-lg-8 mb-4">
+                        <div class="dashboard-card">
+                            <div class="card-header">
+                                <h5><i class="fas fa-chart-line"></i> Threat Activity (Last 7 Days)</h5>
+                            </div>
+                            <div class="card-body">
+                                <canvas id="clientThreatActivityChart" width="400" height="200"></canvas>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4 mb-4">
+                        <div class="dashboard-card">
+                            <div class="card-header">
+                                <h5><i class="fas fa-bell"></i> Recent Alerts</h5>
+                            </div>
+                            <div class="card-body">
+                                <div class="alert-item">
+                                    <div class="alert-icon warning"><i class="fas fa-exclamation-triangle"></i></div>
+                                    <div class="alert-content">
+                                        <h6>Suspicious Login Attempt</h6>
+                                        <small>2 hours ago</small>
+                                    </div>
+                                </div>
+                                <div class="alert-item">
+                                    <div class="alert-icon info"><i class="fas fa-info-circle"></i></div>
+                                    <div class="alert-content">
+                                        <h6>System Update Available</h6>
+                                        <small>5 hours ago</small>
+                                    </div>
+                                </div>
+                                <div class="alert-item">
+                                    <div class="alert-icon success"><i class="fas fa-check-circle"></i></div>
+                                    <div class="alert-content">
+                                        <h6>Scan Completed</h6>
+                                        <small>1 day ago</small>
+                                    </div>
+                                </div>
+                                <div class="text-center mt-3">
+                                    <a href="../404.html" class="btn btn-sm btn-outline-primary">View All Alerts</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Recent Activity -->
+                <div class="row">
+                    <div class="col-12 mb-4">
+                        <div class="dashboard-card">
+                            <div class="card-header">
+                                <h5><i class="fas fa-history"></i> Recent Activity</h5>
+                            </div>
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <table class="table table-hover">
+                                        <thead>
+                                            <tr>
+                                                <th>Date</th>
+                                                <th>Event</th>
+                                                <th>Status</th>
+                                                <th>Action</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>Mar 19, 2024 10:30 AM</td>
+                                                <td>Malware Detected and Blocked</td>
+                                                <td><span class="badge bg-success">Resolved</span></td>
+                                                <td><a href="../404.html" class="btn btn-sm btn-outline-primary">Details</a></td>
+                                            </tr>
+                                            <tr>
+                                                <td>Mar 19, 2024 09:15 AM</td>
+                                                <td>Firewall Rule Updated</td>
+                                                <td><span class="badge bg-info">Completed</span></td>
+                                                <td><a href="../404.html" class="btn btn-sm btn-outline-primary">Details</a></td>
+                                            </tr>
+                                            <tr>
+                                                <td>Mar 18, 2024 04:45 PM</td>
+                                                <td>Security Scan Initiated</td>
+                                                <td><span class="badge bg-success">Completed</span></td>
+                                                <td><a href="../404.html" class="btn btn-sm btn-outline-primary">Details</a></td>
+                                            </tr>
+                                            <tr>
+                                                <td>Mar 18, 2024 02:20 PM</td>
+                                                <td>User Access Granted</td>
+                                                <td><span class="badge bg-info">Completed</span></td>
+                                                <td><a href="../404.html" class="btn btn-sm btn-outline-primary">Details</a></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                </div> <!-- End Dashboard Section -->
+
+                <!-- Security Status Section -->
+                <div id="security-status-section" class="dashboard-section">
+                    <div class="page-header-dashboard mb-4">
+                        <h1>Security Status</h1>
+                        <p class="text-muted">Current security status and protection details</p>
+                    </div>
+                    
+                    <!-- Security Overview -->
+                    <div class="row mb-4">
+                        <div class="col-md-6 mb-4">
+                            <div class="dashboard-card">
+                                <div class="card-body text-center">
+                                    <i class="fas fa-shield-alt fa-4x text-success mb-3"></i>
+                                    <h4>Protection Status</h4>
+                                    <h2 class="text-success">ACTIVE</h2>
+                                    <p>All security systems are operational</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 mb-4">
+                            <div class="dashboard-card">
+                                <div class="card-body text-center">
+                                    <i class="fas fa-clock fa-4x text-info mb-3"></i>
+                                    <h4>Last Scan</h4>
+                                    <h2 class="text-info">2h ago</h2>
+                                    <p>Next scan in 22 hours</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Security Metrics -->
+                    <div class="row mb-4">
+                        <div class="col-12">
+                            <div class="dashboard-card">
+                                <div class="card-header">
+                                    <h5><i class="fas fa-chart-bar"></i> Security Metrics (Last 30 Days)</h5>
+                                </div>
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-md-3 text-center mb-3">
+                                            <div class="metric-item">
+                                                <h3 class="text-success">1,247</h3>
+                                                <p>Threats Blocked</p>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3 text-center mb-3">
+                                            <div class="metric-item">
+                                                <h3 class="text-warning">23</h3>
+                                                <p>Warnings</p>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3 text-center mb-3">
+                                            <div class="metric-item">
+                                                <h3 class="text-info">99.8%</h3>
+                                                <p>Uptime</p>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3 text-center mb-3">
+                                            <div class="metric-item">
+                                                <h3 class="text-primary">156</h3>
+                                                <p>Updates Applied</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Active Protections -->
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="dashboard-card">
+                                <div class="card-header">
+                                    <h5><i class="fas fa-shield-alt"></i> Active Security Measures</h5>
+                                </div>
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-md-4 mb-3">
+                                            <div class="protection-item active">
+                                                <i class="fas fa-firewall text-primary"></i>
+                                                <span>Firewall Protection</span>
+                                                <small class="text-success">Active</small>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4 mb-3">
+                                            <div class="protection-item active">
+                                                <i class="fas fa-virus-slash text-danger"></i>
+                                                <span>Antivirus Engine</span>
+                                                <small class="text-success">Active</small>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4 mb-3">
+                                            <div class="protection-item active">
+                                                <i class="fas fa-lock text-warning"></i>
+                                                <span>Encryption</span>
+                                                <small class="text-success">Active</small>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4 mb-3">
+                                            <div class="protection-item active">
+                                                <i class="fas fa-eye text-info"></i>
+                                                <span>Intrusion Detection</span>
+                                                <small class="text-success">Active</small>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4 mb-3">
+                                            <div class="protection-item active">
+                                                <i class="fas fa-cloud text-secondary"></i>
+                                                <span>Cloud Backup</span>
+                                                <small class="text-success">Active</small>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4 mb-3">
+                                            <div class="protection-item active">
+                                                <i class="fas fa-user-shield text-dark"></i>
+                                                <span>Access Control</span>
+                                                <small class="text-success">Active</small>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Reports Section -->
+                <div id="reports-section" class="dashboard-section">
+                    <div class="page-header-dashboard mb-4">
+                        <h1>Reports</h1>
+                        <p class="text-muted">View and download security reports</p>
+                    </div>
+                    
+                    <!-- Report Generation -->
+                    <div class="row mb-4">
+                        <div class="col-12">
+                            <div class="dashboard-card">
+                                <div class="card-header">
+                                    <h5><i class="fas fa-file-alt"></i> Generate New Report</h5>
+                                </div>
+                                <div class="card-body">
+                                    <form class="row g-3">
+                                        <div class="col-md-4">
+                                            <label class="form-label">Report Type</label>
+                                            <select class="form-control">
+                                                <option>Security Summary</option>
+                                                <option>Threat Analysis</option>
+                                                <option>Compliance Report</option>
+                                                <option>Incident Report</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <label class="form-label">Date Range</label>
+                                            <select class="form-control">
+                                                <option>Last 7 days</option>
+                                                <option>Last 30 days</option>
+                                                <option>Last 3 months</option>
+                                                <option>Custom Range</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <label class="form-label">Format</label>
+                                            <select class="form-control">
+                                                <option>PDF</option>
+                                                <option>Excel</option>
+                                                <option>CSV</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-md-2">
+                                            <label class="form-label">&nbsp;</label>
+                                            <button type="submit" class="btn btn-primary w-100">Generate</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Recent Reports -->
+                    <div class="row mb-4">
+                        <div class="col-12">
+                            <div class="dashboard-card">
+                                <div class="card-header">
+                                    <h5><i class="fas fa-history"></i> Recent Reports</h5>
+                                </div>
+                                <div class="card-body">
+                                    <div class="table-responsive">
+                                        <table class="table table-hover">
+                                            <thead>
+                                                <tr>
+                                                    <th>Report Name</th>
+                                                    <th>Type</th>
+                                                    <th>Generated</th>
+                                                    <th>Size</th>
+                                                    <th>Actions</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td>Weekly Security Summary</td>
+                                                    <td>Security Summary</td>
+                                                    <td>Mar 20, 2024</td>
+                                                    <td>2.4 MB</td>
+                                                    <td>
+                                                        <button class="btn btn-sm btn-outline-primary" onclick="location.href='../404.html'">Download</button>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Threat Analysis Q1</td>
+                                                    <td>Threat Analysis</td>
+                                                    <td>Mar 15, 2024</td>
+                                                    <td>5.1 MB</td>
+                                                    <td>
+                                                        <button class="btn btn-sm btn-outline-primary" onclick="location.href='../404.html'">Download</button>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Compliance Report</td>
+                                                    <td>Compliance</td>
+                                                    <td>Mar 10, 2024</td>
+                                                    <td>1.8 MB</td>
+                                                    <td>
+                                                        <button class="btn btn-sm btn-outline-primary" onclick="location.href='../404.html'">Download</button>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Report Statistics -->
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="dashboard-card">
+                                <div class="card-header">
+                                    <h5><i class="fas fa-chart-pie"></i> Report Statistics</h5>
+                                </div>
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-md-8">
+                                            <canvas id="reportChart" width="400" height="200"></canvas>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="chart-legend">
+                                                <div class="legend-item">
+                                                    <span class="legend-color" style="background-color: #007bff;"></span>
+                                                    <span>Security Summary (45%)</span>
+                                                </div>
+                                                <div class="legend-item">
+                                                    <span class="legend-color" style="background-color: #28a745;"></span>
+                                                    <span>Threat Analysis (30%)</span>
+                                                </div>
+                                                <div class="legend-item">
+                                                    <span class="legend-color" style="background-color: #ffc107;"></span>
+                                                    <span>Compliance (15%)</span>
+                                                </div>
+                                                <div class="legend-item">
+                                                    <span class="legend-color" style="background-color: #dc3545;"></span>
+                                                    <span>Incident Reports (10%)</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Alerts Section -->
+                <div id="alerts-section" class="dashboard-section">
+                    <div class="page-header-dashboard mb-4">
+                        <h1>Alerts</h1>
+                        <p class="text-muted">Security alerts and notifications</p>
+                    </div>
+                    
+                    <!-- Alert Filters -->
+                    <div class="row mb-4">
+                        <div class="col-12">
+                            <div class="dashboard-card">
+                                <div class="card-body">
+                                    <div class="row g-3">
+                                        <div class="col-md-3">
+                                            <select class="form-control">
+                                                <option>All Alerts</option>
+                                                <option>Critical</option>
+                                                <option>Warning</option>
+                                                <option>Info</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <select class="form-control">
+                                                <option>All Time</option>
+                                                <option>Last 24 hours</option>
+                                                <option>Last 7 days</option>
+                                                <option>Last 30 days</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <input type="text" class="form-control" placeholder="Search alerts...">
+                                        </div>
+                                        <div class="col-md-3">
+                                            <button class="btn btn-primary w-100">Filter</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Alert Statistics -->
+                    <div class="row mb-4">
+                        <div class="col-xl-3 col-md-6 mb-4">
+                            <div class="stat-card-dashboard red">
+                                <div class="stat-icon"><i class="fas fa-exclamation-circle"></i></div>
+                                <div class="stat-info">
+                                    <h3>Critical</h3>
+                                    <p class="stat-number">3</p>
+                                    <small>Require immediate action</small>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-3 col-md-6 mb-4">
+                            <div class="stat-card-dashboard orange">
+                                <div class="stat-icon"><i class="fas fa-exclamation-triangle"></i></div>
+                                <div class="stat-info">
+                                    <h3>Warnings</h3>
+                                    <p class="stat-number">12</p>
+                                    <small>Need attention</small>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-3 col-md-6 mb-4">
+                            <div class="stat-card-dashboard blue">
+                                <div class="stat-icon"><i class="fas fa-info-circle"></i></div>
+                                <div class="stat-info">
+                                    <h3>Info</h3>
+                                    <p class="stat-number">28</p>
+                                    <small>Informational</small>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-3 col-md-6 mb-4">
+                            <div class="stat-card-dashboard green">
+                                <div class="stat-icon"><i class="fas fa-check-circle"></i></div>
+                                <div class="stat-info">
+                                    <h3>Resolved</h3>
+                                    <p class="stat-number">156</p>
+                                    <small>This month</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Recent Alerts -->
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="dashboard-card">
+                                <div class="card-header">
+                                    <h5><i class="fas fa-bell"></i> Recent Alerts</h5>
+                                </div>
+                                <div class="card-body">
+                                    <div class="alert-item critical">
+                                        <div class="alert-icon danger"><i class="fas fa-exclamation-circle"></i></div>
+                                        <div class="alert-content">
+                                            <h6>Unauthorized Access Attempt</h6>
+                                            <p>Multiple failed login attempts from IP 192.168.1.100</p>
+                                            <small>2 hours ago • High Priority</small>
+                                        </div>
+                                        <div class="alert-actions">
+                                            <button class="btn btn-sm btn-danger" onclick="location.href='../404.html'">Investigate</button>
+                                        </div>
+                                    </div>
+                                    <div class="alert-item warning">
+                                        <div class="alert-icon warning"><i class="fas fa-exclamation-triangle"></i></div>
+                                        <div class="alert-content">
+                                            <h6>Unusual Network Traffic</h6>
+                                            <p>Increased outbound traffic detected on port 443</p>
+                                            <small>4 hours ago • Medium Priority</small>
+                                        </div>
+                                        <div class="alert-actions">
+                                            <button class="btn btn-sm btn-warning" onclick="location.href='../404.html'">Review</button>
+                                        </div>
+                                    </div>
+                                    <div class="alert-item info">
+                                        <div class="alert-icon info"><i class="fas fa-info-circle"></i></div>
+                                        <div class="alert-content">
+                                            <h6>Security Update Available</h6>
+                                            <p>Critical security patch released for your system</p>
+                                            <small>6 hours ago • Low Priority</small>
+                                        </div>
+                                        <div class="alert-actions">
+                                            <button class="btn btn-sm btn-info" onclick="location.href='../404.html'">Update</button>
+                                        </div>
+                                    </div>
+                                    <div class="alert-item success">
+                                        <div class="alert-icon success"><i class="fas fa-check-circle"></i></div>
+                                        <div class="alert-content">
+                                            <h6>Threat Successfully Blocked</h6>
+                                            <p>Malware attempt neutralized by antivirus engine</p>
+                                            <small>8 hours ago • Resolved</small>
+                                        </div>
+                                        <div class="alert-actions">
+                                            <button class="btn btn-sm btn-success" onclick="location.href='../404.html'">Details</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Invoices Section -->
+                <div id="invoices-section" class="dashboard-section">
+                    <div class="page-header-dashboard mb-4">
+                        <h1>Invoices</h1>
+                        <p class="text-muted">Billing and invoice management</p>
+                    </div>
+                    
+                    <!-- Billing Summary -->
+                    <div class="row mb-4">
+                        <div class="col-xl-3 col-md-6 mb-4">
+                            <div class="stat-card-dashboard blue">
+                                <div class="stat-icon"><i class="fas fa-dollar-sign"></i></div>
+                                <div class="stat-info">
+                                    <h3>Current Plan</h3>
+                                    <p class="stat-number">$299</p>
+                                    <small>Enterprise Monthly</small>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-3 col-md-6 mb-4">
+                            <div class="stat-card-dashboard green">
+                                <div class="stat-icon"><i class="fas fa-calendar-check"></i></div>
+                                <div class="stat-info">
+                                    <h3>Next Billing</h3>
+                                    <p class="stat-number">Mar 25</p>
+                                    <small>2024</small>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-3 col-md-6 mb-4">
+                            <div class="stat-card-dashboard orange">
+                                <div class="stat-icon"><i class="fas fa-clock"></i></div>
+                                <div class="stat-info">
+                                    <h3>Outstanding</h3>
+                                    <p class="stat-number">$0</p>
+                                    <small>All paid</small>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-3 col-md-6 mb-4">
+                            <div class="stat-card-dashboard purple">
+                                <div class="stat-icon"><i class="fas fa-history"></i></div>
+                                <div class="stat-info">
+                                    <h3>Last Year</h3>
+                                    <p class="stat-number">$3,588</p>
+                                    <small>Total spent</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Invoice List -->
+                    <div class="row mb-4">
+                        <div class="col-12">
+                            <div class="dashboard-card">
+                                <div class="card-header">
+                                    <h5><i class="fas fa-file-invoice-dollar"></i> Recent Invoices</h5>
+                                </div>
+                                <div class="card-body">
+                                    <div class="table-responsive">
+                                        <table class="table table-hover">
+                                            <thead>
+                                                <tr>
+                                                    <th>Invoice #</th>
+                                                    <th>Date</th>
+                                                    <th>Period</th>
+                                                    <th>Amount</th>
+                                                    <th>Status</th>
+                                                    <th>Actions</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td>INV-2024-0025</td>
+                                                    <td>Mar 01, 2024</td>
+                                                    <td>Feb 2024</td>
+                                                    <td>$299.00</td>
+                                                    <td><span class="badge bg-success">Paid</span></td>
+                                                    <td>
+                                                        <button class="btn btn-sm btn-outline-primary" onclick="location.href='../404.html'">Download</button>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>INV-2024-0024</td>
+                                                    <td>Feb 01, 2024</td>
+                                                    <td>Jan 2024</td>
+                                                    <td>$299.00</td>
+                                                    <td><span class="badge bg-success">Paid</span></td>
+                                                    <td>
+                                                        <button class="btn btn-sm btn-outline-primary" onclick="location.href='../404.html'">Download</button>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>INV-2024-0023</td>
+                                                    <td>Jan 01, 2024</td>
+                                                    <td>Dec 2023</td>
+                                                    <td>$299.00</td>
+                                                    <td><span class="badge bg-success">Paid</span></td>
+                                                    <td>
+                                                        <button class="btn btn-sm btn-outline-primary" onclick="location.href='../404.html'">Download</button>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>INV-2024-0026</td>
+                                                    <td>Apr 01, 2024</td>
+                                                    <td>Mar 2024</td>
+                                                    <td>$299.00</td>
+                                                    <td><span class="badge bg-warning">Pending</span></td>
+                                                    <td>
+                                                        <button class="btn btn-sm btn-outline-primary" onclick="location.href='../404.html'">Preview</button>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Payment Methods -->
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="dashboard-card">
+                                <div class="card-header">
+                                    <h5><i class="fas fa-credit-card"></i> Payment Methods</h5>
+                                </div>
+                                <div class="card-body">
+                                    <div class="payment-method active">
+                                        <div class="d-flex justify-content-between align-items-center">
+                                            <div>
+                                                <i class="fas fa-credit-card text-primary"></i>
+                                                <span>**** **** **** 4532</span>
+                                                <small class="text-muted d-block">Expires 12/26</small>
+                                            </div>
+                                            <div>
+                                                <span class="badge bg-success">Primary</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="payment-method">
+                                        <div class="d-flex justify-content-between align-items-center">
+                                            <div>
+                                                <i class="fab fa-paypal text-info"></i>
+                                                <span>client@company.com</span>
+                                                <small class="text-muted d-block">PayPal Account</small>
+                                            </div>
+                                            <div>
+                                                <button class="btn btn-sm btn-outline-secondary" onclick="location.href='../404.html'">Set Primary</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <button class="btn btn-outline-primary w-100 mt-3" onclick="location.href='../404.html'">
+                                        <i class="fas fa-plus"></i> Add Payment Method
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="dashboard-card">
+                                <div class="card-header">
+                                    <h5><i class="fas fa-chart-line"></i> Spending Overview</h5>
+                                </div>
+                                <div class="card-body">
+                                    <canvas id="spendingChart" width="300" height="200"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Support Tickets Section -->
+                <div id="support-tickets-section" class="dashboard-section">
+                    <div class="page-header-dashboard mb-4">
+                        <h1>Support Tickets</h1>
+                        <p class="text-muted">Manage your support requests</p>
+                    </div>
+                    
+                    <!-- Ticket Statistics -->
+                    <div class="row mb-4">
+                        <div class="col-xl-3 col-md-6 mb-4">
+                            <div class="stat-card-dashboard blue">
+                                <div class="stat-icon"><i class="fas fa-ticket-alt"></i></div>
+                                <div class="stat-info">
+                                    <h3>Open</h3>
+                                    <p class="stat-number">3</p>
+                                    <small>Active tickets</small>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-3 col-md-6 mb-4">
+                            <div class="stat-card-dashboard green">
+                                <div class="stat-icon"><i class="fas fa-check-circle"></i></div>
+                                <div class="stat-info">
+                                    <h3>Resolved</h3>
+                                    <p class="stat-number">24</p>
+                                    <small>This month</small>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-3 col-md-6 mb-4">
+                            <div class="stat-card-dashboard orange">
+                                <div class="stat-icon"><i class="fas fa-clock"></i></div>
+                                <div class="stat-info">
+                                    <h3>Avg Response</h3>
+                                    <p class="stat-number">2.3h</p>
+                                    <small>Response time</small>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-3 col-md-6 mb-4">
+                            <div class="stat-card-dashboard purple">
+                                <div class="stat-icon"><i class="fas fa-star"></i></div>
+                                <div class="stat-info">
+                                    <h3>Satisfaction</h3>
+                                    <p class="stat-number">4.8</p>
+                                    <small>Out of 5</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Create New Ticket -->
+                    <div class="row mb-4">
+                        <div class="col-12">
+                            <div class="dashboard-card">
+                                <div class="card-header">
+                                    <h5><i class="fas fa-plus"></i> Create New Support Ticket</h5>
+                                </div>
+                                <div class="card-body">
+                                    <form class="row g-3">
+                                        <div class="col-md-6">
+                                            <label class="form-label">Subject *</label>
+                                            <input type="text" class="form-control" placeholder="Brief description of your issue">
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label class="form-label">Priority</label>
+                                            <select class="form-control">
+                                                <option>Low</option>
+                                                <option>Normal</option>
+                                                <option>High</option>
+                                                <option>Urgent</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label class="form-label">Category</label>
+                                            <select class="form-control">
+                                                <option>Technical Support</option>
+                                                <option>Billing</option>
+                                                <option>Security Issue</option>
+                                                <option>Feature Request</option>
+                                                <option>General Inquiry</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label class="form-label">Attachment</label>
+                                            <input type="file" class="form-control">
+                                        </div>
+                                        <div class="col-12">
+                                            <label class="form-label">Description *</label>
+                                            <textarea class="form-control" rows="4" placeholder="Detailed description of your issue..."></textarea>
+                                        </div>
+                                        <div class="col-12">
+                                            <button type="submit" class="btn btn-primary">Submit Ticket</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Recent Tickets -->
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="dashboard-card">
+                                <div class="card-header">
+                                    <h5><i class="fas fa-list"></i> Recent Support Tickets</h5>
+                                </div>
+                                <div class="card-body">
+                                    <div class="ticket-item">
+                                        <div class="ticket-header">
+                                            <h6>Ticket #STK-2024-0042</h6>
+                                            <span class="badge bg-warning">In Progress</span>
+                                        </div>
+                                        <p>Firewall configuration issue with remote access</p>
+                                        <div class="ticket-meta">
+                                            <small><i class="fas fa-clock"></i> Updated 2 hours ago</small>
+                                            <small><i class="fas fa-user"></i> Agent: Sarah Johnson</small>
+                                        </div>
+                                        <div class="ticket-actions">
+                                            <button class="btn btn-sm btn-outline-primary" onclick="location.href='../404.html'">View Details</button>
+                                            <button class="btn btn-sm btn-outline-secondary" onclick="location.href='../404.html'">Add Update</button>
+                                        </div>
+                                    </div>
+                                    <div class="ticket-item">
+                                        <div class="ticket-header">
+                                            <h6>Ticket #STK-2024-0039</h6>
+                                            <span class="badge bg-success">Resolved</span>
+                                        </div>
+                                        <p>Password reset for admin account</p>
+                                        <div class="ticket-meta">
+                                            <small><i class="fas fa-clock"></i> Closed 1 day ago</small>
+                                            <small><i class="fas fa-user"></i> Agent: Mike Chen</small>
+                                        </div>
+                                        <div class="ticket-actions">
+                                            <button class="btn btn-sm btn-outline-primary" onclick="location.href='../404.html'">View Details</button>
+                                        </div>
+                                    </div>
+                                    <div class="ticket-item">
+                                        <div class="ticket-header">
+                                            <h6>Ticket #STK-2024-0035</h6>
+                                            <span class="badge bg-info">Waiting for Customer</span>
+                                        </div>
+                                        <p>Request for additional security training materials</p>
+                                        <div class="ticket-meta">
+                                            <small><i class="fas fa-clock"></i> Updated 3 days ago</small>
+                                            <small><i class="fas fa-user"></i> Agent: Lisa Wong</small>
+                                        </div>
+                                        <div class="ticket-actions">
+                                            <button class="btn btn-sm btn-outline-primary" onclick="location.href='../404.html'">View Details</button>
+                                            <button class="btn btn-sm btn-outline-secondary" onclick="location.href='../404.html'">Reply</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Downloads Section -->
+                <div id="downloads-section" class="dashboard-section">
+                    <div class="page-header-dashboard mb-4">
+                        <h1>Downloads</h1>
+                        <p class="text-muted">Download tools and resources</p>
+                    </div>
+                    
+                    <!-- Download Categories -->
+                    <div class="row mb-4">
+                        <div class="col-12">
+                            <div class="dashboard-card">
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-md-3 mb-3">
+                                            <div class="download-category">
+                                                <i class="fas fa-shield-alt fa-2x text-primary mb-2"></i>
+                                                <h6>Security Tools</h6>
+                                                <p>Antivirus, firewalls, and security utilities</p>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3 mb-3">
+                                            <div class="download-category">
+                                                <i class="fas fa-book fa-2x text-info mb-2"></i>
+                                                <h6>Documentation</h6>
+                                                <p>Guides, manuals, and help files</p>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3 mb-3">
+                                            <div class="download-category">
+                                                <i class="fas fa-mobile-alt fa-2x text-success mb-2"></i>
+                                                <h6>Mobile Apps</h6>
+                                                <p>Android and iOS security applications</p>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3 mb-3">
+                                            <div class="download-category">
+                                                <i class="fas fa-plug fa-2x text-warning mb-2"></i>
+                                                <h6>Integrations</h6>
+                                                <p>API clients and third-party integrations</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Available Downloads -->
+                    <div class="row mb-4">
+                        <div class="col-12">
+                            <div class="dashboard-card">
+                                <div class="card-header">
+                                    <h5><i class="fas fa-download"></i> Available Downloads</h5>
+                                </div>
+                                <div class="card-body">
+                                    <div class="download-item">
+                                        <div class="download-info">
+                                            <i class="fas fa-shield-virus fa-2x text-primary"></i>
+                                            <div>
+                                                <h6>Stackly Antivirus Pro v2.1.4</h6>
+                                                <p>Advanced threat protection for Windows</p>
+                                                <small>Size: 45.2 MB • Version: 2.1.4 • Updated: Mar 15, 2024</small>
+                                            </div>
+                                        </div>
+                                        <div class="download-actions">
+                                            <button class="btn btn-primary btn-sm" onclick="location.href='../404.html'">Download</button>
+                                            <button class="btn btn-outline-secondary btn-sm" onclick="location.href='../404.html'">Release Notes</button>
+                                        </div>
+                                    </div>
+                                    <div class="download-item">
+                                        <div class="download-info">
+                                            <i class="fas fa-mobile-alt fa-2x text-success"></i>
+                                            <div>
+                                                <h6>Stackly Mobile Security</h6>
+                                                <p>Comprehensive mobile security for Android</p>
+                                                <small>Size: 12.8 MB • Version: 1.8.2 • Updated: Mar 10, 2024</small>
+                                            </div>
+                                        </div>
+                                        <div class="download-actions">
+                                            <button class="btn btn-success btn-sm" onclick="location.href='../404.html'">Download APK</button>
+                                            <button class="btn btn-outline-secondary btn-sm" onclick="location.href='../404.html'">Release Notes</button>
+                                        </div>
+                                    </div>
+                                    <div class="download-item">
+                                        <div class="download-info">
+                                            <i class="fas fa-file-pdf fa-2x text-danger"></i>
+                                            <div>
+                                                <h6>Security Best Practices Guide</h6>
+                                                <p>Comprehensive guide for enterprise security</p>
+                                                <small>Size: 8.5 MB • Pages: 127 • Updated: Feb 28, 2024</small>
+                                            </div>
+                                        </div>
+                                        <div class="download-actions">
+                                            <button class="btn btn-danger btn-sm" onclick="location.href='../404.html'">Download PDF</button>
+                                            <button class="btn btn-outline-secondary btn-sm" onclick="location.href='../404.html'">View Online</button>
+                                        </div>
+                                    </div>
+                                    <div class="download-item">
+                                        <div class="download-info">
+                                            <i class="fas fa-code fa-2x text-info"></i>
+                                            <div>
+                                                <h6>API Documentation</h6>
+                                                <p>Complete API reference and examples</p>
+                                                <small>Size: 3.2 MB • Format: HTML • Updated: Mar 01, 2024</small>
+                                            </div>
+                                        </div>
+                                        <div class="download-actions">
+                                            <button class="btn btn-info btn-sm" onclick="location.href='../404.html'">Download</button>
+                                            <button class="btn btn-outline-secondary btn-sm" onclick="location.href='../404.html'">View Online</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Download History -->
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="dashboard-card">
+                                <div class="card-header">
+                                    <h5><i class="fas fa-history"></i> Recent Downloads</h5>
+                                </div>
+                                <div class="card-body">
+                                    <div class="table-responsive">
+                                        <table class="table table-hover">
+                                            <thead>
+                                                <tr>
+                                                    <th>File</th>
+                                                    <th>Downloaded</th>
+                                                    <th>Size</th>
+                                                    <th>Status</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td>Stackly Antivirus Pro v2.1.4</td>
+                                                    <td>Mar 20, 2024 2:30 PM</td>
+                                                    <td>45.2 MB</td>
+                                                    <td><span class="badge bg-success">Completed</span></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Security Best Practices Guide</td>
+                                                    <td>Mar 18, 2024 9:15 AM</td>
+                                                    <td>8.5 MB</td>
+                                                    <td><span class="badge bg-success">Completed</span></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>API Documentation</td>
+                                                    <td>Mar 15, 2024 4:45 PM</td>
+                                                    <td>3.2 MB</td>
+                                                    <td><span class="badge bg-success">Completed</span></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Documentation Section -->
+                <div id="documentation-section" class="dashboard-section">
+                    <div class="page-header-dashboard mb-4">
+                        <h1>Documentation</h1>
+                        <p class="text-muted">Help and documentation</p>
+                    </div>
+                    
+                    <!-- Quick Search -->
+                    <div class="row mb-4">
+                        <div class="col-12">
+                            <div class="dashboard-card">
+                                <div class="card-body">
+                                    <div class="input-group">
+                                        <input type="text" class="form-control" placeholder="Search documentation...">
+                                        <button class="btn btn-primary">
+                                            <i class="fas fa-search"></i> Search
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Documentation Categories -->
+                    <div class="row mb-4">
+                        <div class="col-md-6 mb-4">
+                            <div class="dashboard-card">
+                                <div class="card-header">
+                                    <h5><i class="fas fa-user-shield"></i> Getting Started</h5>
+                                </div>
+                                <div class="card-body">
+                                    <div class="doc-item">
+                                        <h6>Welcome Guide</h6>
+                                        <p>Introduction to Stackly security platform</p>
+                                        <a href="../404.html" class="btn btn-sm btn-outline-primary">Read</a>
+                                    </div>
+                                    <div class="doc-item">
+                                        <h6>Quick Setup</h6>
+                                        <p>Get your security system running in minutes</p>
+                                        <a href="../404.html" class="btn btn-sm btn-outline-primary">Read</a>
+                                    </div>
+                                    <div class="doc-item">
+                                        <h6>Dashboard Overview</h6>
+                                        <p>Understanding your security dashboard</p>
+                                        <a href="../404.html" class="btn btn-sm btn-outline-primary">Read</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 mb-4">
+                            <div class="dashboard-card">
+                                <div class="card-header">
+                                    <h5><i class="fas fa-cogs"></i> Configuration</h5>
+                                </div>
+                                <div class="card-body">
+                                    <div class="doc-item">
+                                        <h6>Firewall Setup</h6>
+                                        <p>Configure advanced firewall rules</p>
+                                        <a href="../404.html" class="btn btn-sm btn-outline-primary">Read</a>
+                                    </div>
+                                    <div class="doc-item">
+                                        <h6>Access Control</h6>
+                                        <p>Manage user permissions and roles</p>
+                                        <a href="../404.html" class="btn btn-sm btn-outline-primary">Read</a>
+                                    </div>
+                                    <div class="doc-item">
+                                        <h6>Backup Configuration</h6>
+                                        <p>Set up automated backup systems</p>
+                                        <a href="../404.html" class="btn btn-sm btn-outline-primary">Read</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Popular Articles -->
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="dashboard-card">
+                                <div class="card-header">
+                                    <h5><i class="fas fa-star"></i> Popular Articles</h5>
+                                </div>
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-md-4 mb-3">
+                                            <div class="popular-article">
+                                                <h6>Troubleshooting Common Issues</h6>
+                                                <p>Solutions to frequently encountered problems</p>
+                                                <div class="article-meta">
+                                                    <small><i class="fas fa-eye"></i> 2.3k views</small>
+                                                    <small><i class="fas fa-clock"></i> 5 min read</small>
+                                                </div>
+                                                <a href="../404.html" class="btn btn-sm btn-primary">Read Article</a>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4 mb-3">
+                                            <div class="popular-article">
+                                                <h6>Security Best Practices</h6>
+                                                <p>Essential security measures for your organization</p>
+                                                <div class="article-meta">
+                                                    <small><i class="fas fa-eye"></i> 1.8k views</small>
+                                                    <small><i class="fas fa-clock"></i> 8 min read</small>
+                                                </div>
+                                                <a href="../404.html" class="btn btn-sm btn-primary">Read Article</a>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4 mb-3">
+                                            <div class="popular-article">
+                                                <h6>Advanced Threat Detection</h6>
+                                                <p>Understanding AI-powered threat detection</p>
+                                                <div class="article-meta">
+                                                    <small><i class="fas fa-eye"></i> 1.5k views</small>
+                                                    <small><i class="fas fa-clock"></i> 6 min read</small>
+                                                </div>
+                                                <a href="../404.html" class="btn btn-sm btn-primary">Read Article</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Settings Section -->
+                <div id="settings-section" class="dashboard-section">
+                    <div class="page-header-dashboard mb-4">
+                        <h1>Settings</h1>
+                        <p class="text-muted">Account and system settings</p>
+                    </div>
+                    
+                    <!-- Account Settings -->
+                    <div class="row mb-4">
+                        <div class="col-md-6">
+                            <div class="dashboard-card">
+                                <div class="card-header">
+                                    <h5><i class="fas fa-user"></i> Account Information</h5>
+                                </div>
+                                <div class="card-body">
+                                    <form>
+                                        <div class="mb-3">
+                                            <label class="form-label">Full Name</label>
+                                            <input type="text" class="form-control" value="John Smith">
+                                        </div>
+                                        <div class="mb-3">
+                                            <label class="form-label">Email Address</label>
+                                            <input type="email" class="form-control" value="john.smith@company.com">
+                                        </div>
+                                        <div class="mb-3">
+                                            <label class="form-label">Phone Number</label>
+                                            <input type="tel" class="form-control" value="+1 (555) 123-4567">
+                                        </div>
+                                        <div class="mb-3">
+                                            <label class="form-label">Company</label>
+                                            <input type="text" class="form-control" value="TechCorp Solutions">
+                                        </div>
+                                        <button type="submit" class="btn btn-primary">Update Profile</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="dashboard-card">
+                                <div class="card-header">
+                                    <h5><i class="fas fa-shield-alt"></i> Security Settings</h5>
+                                </div>
+                                <div class="card-body">
+                                    <div class="mb-3">
+                                        <label class="form-label">Change Password</label>
+                                        <button class="btn btn-outline-primary w-100" data-bs-toggle="modal" data-bs-target="#passwordModal">
+                                            Change Password
+                                        </button>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label class="form-label">Two-Factor Authentication</label>
+                                        <div class="form-check form-switch">
+                                            <input class="form-check-input" type="checkbox" checked>
+                                            <label class="form-check-label">Enable 2FA</label>
+                                        </div>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label class="form-label">Login Notifications</label>
+                                        <div class="form-check form-switch">
+                                            <input class="form-check-input" type="checkbox" checked>
+                                            <label class="form-check-label">Email alerts for new logins</label>
+                                        </div>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label class="form-label">Session Timeout</label>
+                                        <select class="form-control">
+                                            <option>15 minutes</option>
+                                            <option>30 minutes</option>
+                                            <option selected>1 hour</option>
+                                            <option>4 hours</option>
+                                            <option>Never</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Notification Preferences -->
+                    <div class="row mb-4">
+                        <div class="col-12">
+                            <div class="dashboard-card">
+                                <div class="card-header">
+                                    <h5><i class="fas fa-bell"></i> Notification Preferences</h5>
+                                </div>
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <h6>Email Notifications</h6>
+                                            <div class="form-check mb-2">
+                                                <input class="form-check-input" type="checkbox" checked>
+                                                <label class="form-check-label">Security alerts</label>
+                                            </div>
+                                            <div class="form-check mb-2">
+                                                <input class="form-check-input" type="checkbox" checked>
+                                                <label class="form-check-label">System updates</label>
+                                            </div>
+                                            <div class="form-check mb-2">
+                                                <input class="form-check-input" type="checkbox">
+                                                <label class="form-check-label">Marketing communications</label>
+                                            </div>
+                                            <div class="form-check mb-2">
+                                                <input class="form-check-input" type="checkbox" checked>
+                                                <label class="form-check-label">Invoice notifications</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <h6>Dashboard Notifications</h6>
+                                            <div class="form-check mb-2">
+                                                <input class="form-check-input" type="checkbox" checked>
+                                                <label class="form-check-label">Threat detections</label>
+                                            </div>
+                                            <div class="form-check mb-2">
+                                                <input class="form-check-input" type="checkbox" checked>
+                                                <label class="form-check-label">Scan completions</label>
+                                            </div>
+                                            <div class="form-check mb-2">
+                                                <input class="form-check-input" type="checkbox">
+                                                <label class="form-check-label">Maintenance notifications</label>
+                                            </div>
+                                            <div class="form-check mb-2">
+                                                <input class="form-check-input" type="checkbox" checked>
+                                                <label class="form-check-label">Support ticket updates</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <button class="btn btn-primary mt-3">Save Preferences</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- System Preferences -->
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="dashboard-card">
+                                <div class="card-header">
+                                    <h5><i class="fas fa-cogs"></i> System Preferences</h5>
+                                </div>
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <label class="form-label">Dashboard Theme</label>
+                                            <select class="form-control">
+                                                <option selected>Light</option>
+                                                <option>Dark</option>
+                                                <option>Auto</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <label class="form-label">Language</label>
+                                            <select class="form-control">
+                                                <option selected>English</option>
+                                                <option>Spanish</option>
+                                                <option>French</option>
+                                                <option>German</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <label class="form-label">Timezone</label>
+                                            <select class="form-control">
+                                                <option selected>UTC-8 (PST)</option>
+                                                <option>UTC-5 (EST)</option>
+                                                <option>UTC+0 (GMT)</option>
+                                                <option>UTC+1 (CET)</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="mt-3">
+                                        <button class="btn btn-primary">Save Settings</button>
+                                        <button class="btn btn-outline-danger ms-2">Reset to Defaults</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </main>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Section switching functionality
+        document.querySelectorAll('.sidebar-menu a').forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                const section = this.getAttribute('data-section');
+                
+                // Hide all sections
+                document.querySelectorAll('.dashboard-section').forEach(sec => {
+                    sec.classList.remove('active');
+                });
+                
+                // Show selected section
+                document.getElementById(section + '-section').classList.add('active');
+                
+                // Update active sidebar item
+                document.querySelectorAll('.sidebar-menu li').forEach(li => {
+                    li.classList.remove('active');
+                });
+                this.parentElement.classList.add('active');
+            });
+        });
+
+        // Sidebar Toggle for Mobile
+        document.getElementById('sidebarToggle').addEventListener('click', function() {
+            document.getElementById('sidebar').classList.toggle('show');
+        });
+
+        // Close sidebar when clicking outside on mobile
+        document.addEventListener('click', function(event) {
+            const sidebar = document.getElementById('sidebar');
+            const toggle = document.getElementById('sidebarToggle');
+            
+            if (window.innerWidth < 992) {
+                if (!sidebar.contains(event.target) && !toggle.contains(event.target)) {
+                    sidebar.classList.remove('show');
+                }
+            }
+        });
+
+        // Initialize Charts
+        document.addEventListener('DOMContentLoaded', function() {
+            // Threat Activity Chart
+            const threatCtx = document.getElementById('clientThreatActivityChart');
+            if (threatCtx) {
+                new Chart(threatCtx, {
+                    type: 'line',
+                    data: {
+                        labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+                        datasets: [{
+                            label: 'Threats Detected',
+                            data: [12, 19, 8, 15, 22, 6, 14],
+                            borderColor: '#dc3545',
+                            backgroundColor: 'rgba(220, 53, 69, 0.1)',
+                            tension: 0.4,
+                            fill: true
+                        }, {
+                            label: 'Threats Blocked',
+                            data: [10, 17, 7, 13, 20, 5, 12],
+                            borderColor: '#28a745',
+                            backgroundColor: 'rgba(40, 167, 69, 0.1)',
+                            tension: 0.4,
+                            fill: true
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        plugins: {
+                            legend: {
+                                position: 'top',
+                            }
+                        },
+                        scales: {
+                            y: {
+                                beginAtZero: true,
+                                title: {
+                                    display: true,
+                                    text: 'Number of Threats'
+                                }
+                            },
+                            x: {
+                                title: {
+                                    display: true,
+                                    text: 'Day'
+                                }
+                            }
+                        }
+                    }
+                });
+            }
+
+            // Report Chart
+            const reportCtx = document.getElementById('reportChart');
+            if (reportCtx) {
+                new Chart(reportCtx, {
+                    type: 'doughnut',
+                    data: {
+                        labels: ['Security Summary', 'Threat Analysis', 'Compliance', 'Incident Reports'],
+                        datasets: [{
+                            data: [45, 30, 15, 10],
+                            backgroundColor: [
+                                '#007bff',
+                                '#28a745',
+                                '#ffc107',
+                                '#dc3545'
+                            ],
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        plugins: {
+                            legend: {
+                                display: false
+                            }
+                        }
+                    }
+                });
+            }
+
+            // Spending Chart
+            const spendingCtx = document.getElementById('spendingChart');
+            if (spendingCtx) {
+                new Chart(spendingCtx, {
+                    type: 'line',
+                    data: {
+                        labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
+                        datasets: [{
+                            label: 'Monthly Spending',
+                            data: [299, 299, 299, 299, 299, 299],
+                            borderColor: '#007bff',
+                            backgroundColor: 'rgba(0, 123, 255, 0.1)',
+                            tension: 0.1
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        scales: {
+                            y: {
+                                beginAtZero: true,
+                                ticks: {
+                                    callback: function(value) {
+                                        return '$' + value;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                });
+            }
+        });
+    </script>
+</body>
+</html>
