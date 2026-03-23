@@ -35,61 +35,19 @@
                         <i class="fas fa-tachometer-alt"></i> Dashboard
                     </a>
                 </li>
-                <li>
-                    <a href="#" data-section="client-management">
-                        <i class="fas fa-users"></i> Client Management
-                    </a>
-                </li>
+                
                 <li>
                     <a href="#" data-section="threat-monitor">
                         <i class="fas fa-shield-virus"></i> Threat Monitor
                     </a>
                 </li>
-                <li>
-                    <a href="#" data-section="network-status">
-                        <i class="fas fa-network-wired"></i> Network Status
-                    </a>
-                </li>
+               
                 <li>
                     <a href="#" data-section="analytics">
                         <i class="fas fa-chart-line"></i> Analytics
                     </a>
                 </li>
-                <li>
-                    <a href="#" data-section="alerts-incidents">
-                        <i class="fas fa-exclamation-triangle"></i> Alerts & Incidents
-                    </a>
-                </li>
-                <li>
-                    <a href="#" data-section="audit-logs">
-                        <i class="fas fa-clipboard-list"></i> Audit Logs
-                    </a>
-                </li>
-                <li>
-                    <a href="#" data-section="user-management">
-                        <i class="fas fa-user-cog"></i> User Management
-                    </a>
-                </li>
-                <li>
-                    <a href="#" data-section="system-health">
-                        <i class="fas fa-server"></i> System Health
-                    </a>
-                </li>
-                <li>
-                    <a href="#" data-section="configuration">
-                        <i class="fas fa-tools"></i> Configuration
-                    </a>
-                </li>
-                <li>
-                    <a href="#" data-section="reports">
-                        <i class="fas fa-file-alt"></i> Reports
-                    </a>
-                </li>
-                <li>
-                    <a href="#" data-section="settings">
-                        <i class="fas fa-cogs"></i> Settings
-                    </a>
-                </li>
+                
             </ul>
         </aside>
 
@@ -155,10 +113,7 @@
                                 <h5><i class="fas fa-chart-area"></i> Real-time Threat Activity</h5>
                             </div>
                             <div class="card-body">
-                                <div class="chart-placeholder">
-                                    <i class="fas fa-wave-square fa-5x text-muted"></i>
-                                    <p class="text-muted">Live threat monitoring dashboard</p>
-                                </div>
+                                <canvas id="threatActivityChart" height="200"></canvas>
                             </div>
                         </div>
                     </div>
@@ -570,8 +525,8 @@
                                     </div>
                                     <hr>
                                     <div class="d-grid gap-2">
-                                        <button class="btn btn-primary">Update Settings</button>
-                                        <button class="btn btn-outline-danger">Emergency Stop</button>
+                                        <button class="btn btn-primary" onclick="location.href='../404.html'">Update Settings</button>
+                                        <button class="btn btn-outline-danger" onclick="location.href='../404.html'">Emergency Stop</button>
                                     </div>
                                 </div>
                             </div>
@@ -1021,7 +976,14 @@
                         labels: ['00:00', '04:00', '08:00', '12:00', '16:00', '20:00'],
                         datasets: [{
                             label: 'Threats per Hour',
-                            data: [12, 8, 15, 22, 18, 25],
+                            data: [
+                                Math.floor(Math.random() * 30) + 5,
+                                Math.floor(Math.random() * 30) + 5,
+                                Math.floor(Math.random() * 30) + 5,
+                                Math.floor(Math.random() * 30) + 5,
+                                Math.floor(Math.random() * 30) + 5,
+                                Math.floor(Math.random() * 30) + 5
+                            ],
                             borderColor: '#dc3545',
                             backgroundColor: 'rgba(220, 53, 69, 0.1)',
                             tension: 0.1,
@@ -1052,5 +1014,7 @@
             }
         });
     </script>
+
+    
 </body>
 </html>
